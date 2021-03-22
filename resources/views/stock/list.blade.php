@@ -3,9 +3,7 @@
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
-                <input type="hidden" name="pageNum" value="1"/>
-                <input type="hidden" name="numPerPage" value="${model.numPerPage}"/>
-                <input type="hidden" name="orderField" value="${param.orderField}"/>
+                <input type="hidden" name="pageNum" value="{{$params["pageNum"]??1}}"/>
                 <tr>
                     <td>
                         数字货币名称：<input type="text" name="keyword"/>
@@ -13,9 +11,9 @@
                     <!--                    选择价格区间比较低的股票-->
                     <td class="dateRange">
                         价格区间:
-                        <input type="text" name="keyword"/>
+                        <input type="text" name="minPrice"/>
                         <span class="limit">-</span>
-                        <input type="text" name="keyword"/>
+                        <input type="text" name="maxPrice"/>
                     </td>
                 </tr>
             </table>
@@ -76,17 +74,8 @@
         </tbody>
     </table>
     <div class="panelBar">
-        <div class="pages">
-            <span>显示</span>
-            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span>条，共条</span>
-        </div>
-        <div class="pagination" targetType="navTab" totalCount="40" numPerPage="20" pageNumShown="10"
-             currentPage="1">
+        <div class="pagination" targetType="navTab" totalCount="{{$total??15}}" numPerPage="20" pageNumShown="10"
+             currentPage="{{$params["pageNum"]??1}}">
         </div>
     </div>
 </div>

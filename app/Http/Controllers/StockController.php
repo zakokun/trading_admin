@@ -9,11 +9,12 @@ use function PHPUnit\Framework\isEmpty;
 
 class StockController extends Controller
 {
-    public function list()
+    public function list(Request $request)
     {
+        $params = $request->all();
         $ls = Stock::all();
-        return view("stock.list", ["ls" => $ls]);
-    }
+        return view("stock.list", ["ls" => $ls, "param" => $params]);
+    }                       
 
     public function star(Request $request)
     {
