@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::group(['middleware' => ['web']], function () {
+    Route::any("/{controller}/{action}", function ($class, $action) {
+        $class = "App\\Http\\Controllers\\" . ucfirst(strtolower($class)) . 'Controller';
+        if (class_exists($class)) {
+            $ctrl = \App::make($class);
+            return \App::call([$ctrl, $action]);
+        }
+        return abort(404);
+
+    })->where(['class' => '[0-9a-zA-Z]+', 'action' => '[0-9a-zA-Z]+']);
 });
