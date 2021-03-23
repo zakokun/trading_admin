@@ -3,31 +3,23 @@
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
-                <input type="hidden" name="pageNum" value="{{$ls->currentPage()}}"/>
+                <input type="hidden" name="page" value="{{$ls->currentPage()}}"/>
                 <tr>
                     <td>
                         数字货币名称：<input type="text" value="{{$all['keyword']?? ""}}" name="keyword"/>
                     </td>
-                </tr>
-            </table>
-            <div class="subBar">
-                <ul>
-                    <li>
-                        <div class="button">
-                            <div class="buttonContent">
-                                <button type="reset">重置</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
+                    <td>
                         <div class="buttonActive">
                             <div class="buttonContent">
                                 <button type="submit">检索</button>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </td>
+                </tr>
+                <tr>
+
+                </tr>
+            </table>
         </div>
     </form>
 </div>

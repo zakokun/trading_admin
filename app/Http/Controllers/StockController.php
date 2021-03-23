@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Stock;
 use App\Models\UserStockStars;
 use Illuminate\Http\Request;
-use function PHPUnit\Framework\isEmpty;
 
 class StockController extends Controller
 {
@@ -16,7 +15,7 @@ class StockController extends Controller
         if (isset($all["keyword"])) {
             $m = $m->where("symbol", "like", "%" . $all['keyword'] . "%");
         }
-        $ls = $m->paginate(2, ["*"], $pageName = 'pageNum');
+        $ls = $m->paginate(2);
         return view("stock.list", ["ls" => $ls, "all" => $all]);
     }
 

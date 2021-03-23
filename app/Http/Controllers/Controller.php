@@ -14,16 +14,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function json($code, $msg)
+    public function json($code, $msg, $tp, $url)
     {
         return response()->json(
             [
-                "statusCode" => $code,
+                "code" => $code,
                 "message" => $msg,
                 "navTabId" => "",
                 "rel" => "",
-                "callbackType" => "closeCurrent",
-                "forwardUrl" => ""
+                "callbackType" => $tp ?? "closeCurrent",
+                "forwardUrl" => $url
             ]);
     }
 }
