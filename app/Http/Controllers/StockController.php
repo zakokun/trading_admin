@@ -11,10 +11,14 @@ class StockController extends Controller
 {
     public function list(Request $request)
     {
-        $params = $request->all();
-        $ls = Stock::all();
-        return view("stock.list", ["ls" => $ls, "param" => $params]);
-    }                       
+        $m = new Stock();
+        $all = $request->all();
+        if (isset($all["keyword"])) {
+            $m = $m->where("symbol", "like", "%" . $all['keyword'] . "%");
+        }
+        $ls = $m->paginate(2, ["*"], $pageName = 'pageNum');
+        return view("stock.list", ["ls" => $ls, "all" => $all]);
+    }
 
     public function star(Request $request)
     {

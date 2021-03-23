@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\baseModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -24,11 +25,5 @@ class Controller extends BaseController
                 "callbackType" => "closeCurrent",
                 "forwardUrl" => ""
             ]);
-    }
-
-    public function getPage(Request $request, baseModel $model)
-    {
-        $all = $request->all();
-
     }
 }

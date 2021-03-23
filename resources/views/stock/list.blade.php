@@ -3,17 +3,10 @@
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
-                <input type="hidden" name="pageNum" value="{{$params["pageNum"]??1}}"/>
+                <input type="hidden" name="pageNum" value="{{$ls->currentPage()}}"/>
                 <tr>
                     <td>
-                        数字货币名称：<input type="text" name="keyword"/>
-                    </td>
-                    <!--                    选择价格区间比较低的股票-->
-                    <td class="dateRange">
-                        价格区间:
-                        <input type="text" name="minPrice"/>
-                        <span class="limit">-</span>
-                        <input type="text" name="maxPrice"/>
+                        数字货币名称：<input type="text" value="{{$all['keyword']?? ""}}" name="keyword"/>
                     </td>
                 </tr>
             </table>
@@ -74,8 +67,9 @@
         </tbody>
     </table>
     <div class="panelBar">
-        <div class="pagination" targetType="navTab" totalCount="{{$total??15}}" numPerPage="20" pageNumShown="10"
-             currentPage="{{$params["pageNum"]??1}}">
+        <div class="pagination" targetType="navTab" totalCount="{{$ls->total()}}" numPerPage="{{$ls->perPage()}}"
+             pageNumShown="10"
+             currentPage="{{$ls->currentPage()}}">
         </div>
     </div>
 </div>
