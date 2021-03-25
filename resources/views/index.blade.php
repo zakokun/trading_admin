@@ -52,9 +52,9 @@
         <div class="headerNav">
             <a class="logo" href="http://j-ui.com">标志</a>
             <ul class="nav">
-                <li><a href="login.html">user：张</a></li>
+                <li><a href="#">欢迎你：{{$_SESSION['username']}}</a></li>
 
-                <li><a href="login.html">退出</a></li>
+                <li><a href="/login/out">退出</a></li>
             </ul>
             <ul class="themeList" id="themeList">
                 <li theme="default">
