@@ -17,31 +17,14 @@ class LoginController extends Controller
         return view("login.reg");
     }
 
-    // 验证码图片
-    public function captcha()
-    {
-        $captcha = new \Captcha();
-        $_SESSION['captcha'] = $captcha->getCode();
-        $captcha->render();
-    }
-
     public function login(Request $request)
     {
-        var_dump(123123123);
-        return;
-        $captcha = new \Captcha();
-        $msg = [];
-        if (!$captcha->check($request->get("captcha"))) {
-            $msg['captcha'] = "验证码错误！";
-            return view("login.login",$msg);
+        $m = User::where("username", $request->get('username'))->where('password', md5($request->get("password")))->first();
+        if ($m == null) {
+            return view("/login.login1", ["msg" => "用户名或密码错误！"]);
         }
-        var_dump($request->get("username"));
-        return;
-        $m = User::where("username",$request->get('username'))->where('password', md5($request->get("password")))->first();
-
-
-        $_SESSION['user_id'] = 1;
-        $_SESSION['username'] = 'zakokun';
+        $_SESSION['user_id'] = $m->id;
+        $_SESSION['username'] = $m->username;
         return redirect("/");
     }
 
@@ -49,10 +32,28 @@ class LoginController extends Controller
     // 用户注册
     public function regUser(Request $request)
     {
-        $this->validate($request, [
-            'captcha' => 'required|captcha'
-        ]);
-
+        $u = $request->get("username");
+        $p = $request->get("password");
+        $rp = $request->get("repassword");
+        if (strlen($u) < 4 || strlen($p) < 4 || strlen($rp) < 4) {
+            return view("/login/reg", ["msg" => "账号或密码少于4位！"]);
+        }
+        if ($p != $rp) {
+            return view("/login/reg", ["msg" => "两次密码不一致！"]);
+        }
+        $user = User::where("username", $u)->first();
+        if ($user != null) {
+            return view("/login/reg", ["msg" => "用户名已存在！"]);
+        }
+        $user = new User();
+        $user->username = $u;
+        $user->password = md5($p);
+        $user->last_login_time = date("Y-m-d H:i:s");
+        $user = $user->save();
+        $new = User::where("username", $u)->first();
+        $_SESSION['user_id'] = $new->id;
+        $_SESSION['username'] = $u;
+        return redirect("/");
     }
 
     public function out()

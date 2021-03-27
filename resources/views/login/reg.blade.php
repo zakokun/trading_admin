@@ -1,50 +1,65 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>数字货币交易平台</title>
-    <link href="/dwz/themes/css/login.css" rel="stylesheet" type="text/css"/>
-</head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>量化交易系统</title>
 
-<body>
-<div id="login">
-    <div id="login_header">
-        <div class="login_headerContent">
-            <h2 class="login_title">用户注册</h2>
-        </div>
-    </div>
-    <div id="login_content">
-        <div class="loginForm">
-            <form action="/login/regUser">
-                <p>
-                    <label>用户名：</label>
-                    <input type="text" name="username" size="20" class="login_input"/>
-                </p>
-                <p>
-                    <label>密码：</label>
-                    <input type="password" name="password" size="20" class="login_input"/>
-                </p>
-                <p>
-                    <label>重复密码：</label>
-                    <input type="password" name="repassword" size="20" class="login_input"/>
-                </p>
-                <p>
-                    <label>验证码：</label>
-                    <input class="code" name="captcha" type="text" size="5"/>
-                    <span>
-<img class="captcha-img" src="/login/captcha" onclick="this.src='/login/captcha?'+Math.random()">
-                    </span>
-                </p>
-                <div class="login_bar">
-                    <input class="sub" type="submit" value=" 注册"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/login/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/login/css/main.css">
+</head>
+<body data-new-gr-c-s-check-loaded="14.1001.0" data-gr-ext-installed="">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(/login/img/bg-01.jpeg);">
+                <span class="login100-form-title-1">注 册</span>
+            </div>
+
+            <form class="login100-form validate-form" action="/login/regUser" method="post">
+                <div class="wrap-input100 validate-input m-b-26" data-validate="用户名不能为空">
+                    <span class="label-input100">用户名</span>
+                    <input class="input100" type="text" name="username" placeholder="请输入用户名">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="密码不能为空">
+                    <span class="label-input100">密码</span>
+                    <input class="input100" type="password" id="passwordCheck" name="password" placeholder="请输入密码">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="密码不能为空">
+                    <span class="label-input100">重复密码</span>
+                    <input class="input100" type="password" id="repasswordCheck" name="repassword"
+                           placeholder="请重复输入密码">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="flex-sb-m w-full p-b-30">
+                    <div>
+                        <a href="/login/main" class="txt1">转到登录</a>
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">注 册</button>
                 </div>
             </form>
-            <label style="margin-top: 10px"><a href="/login/main">点此登录</a></label>
         </div>
-        <div class="login_banner"><img src="/dwz/themes/default/images/login_banner.jpg"/></div>
-
     </div>
 </div>
+
+<script src="/login/js/jquery-3.2.1.min.js"></script>
+<script src="/login/js/main.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        @isset($msg)
+        alert('{{$msg}}');
+        @endisset
+    });
+</script>
+
 </body>
 </html>

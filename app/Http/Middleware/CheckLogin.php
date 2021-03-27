@@ -16,7 +16,7 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (strstr($request->path(), "login")) {
+        if (strstr($request->path(), "login") && (!isset($_SESSION['user_id']))) {
             return $next($request);
         }
         if (!isset($_SESSION['user_id'])) {
