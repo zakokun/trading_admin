@@ -51,8 +51,9 @@
                 <td>{{$v->volume}}</td>
                 <td>{{$v->ftime}}</td>
                 <td>
-                    <a title="确定加入自选吗？" target="ajaxTodo" href="/stock/star?symbol={{$v->symbol}}" class="btnAdd">关注</a>
-                    <a title="查看详情" target="navTab" href="demo_page4.html?id=xxx" class="btnInfo">详情</a>
+                    <a title="确定{{$v->hasStar()?'取消关注':'关注'}}吗？" target="ajaxTodo"
+                       href="/stock/star?symbol={{$v->symbol}}" class="{{$v->hasStar()?'btnDel':'btnAdd'}}">关注</a>
+                    <a title="查看详情" target="navTab" href="/stock/info?symbol={{$v->symbol}}" class="btnInfo">详情</a>
                 </td>
             </tr>
         @endforeach

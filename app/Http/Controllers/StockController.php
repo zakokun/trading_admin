@@ -19,6 +19,12 @@ class StockController extends Controller
         return view("stock.list", ["ls" => $ls, "all" => $all]);
     }
 
+    function info(Request $request)
+    {
+        $sid = $request->get("stock_id");
+
+    }
+
     public function star(Request $request)
     {
         $symbol = $request->get("symbol");
