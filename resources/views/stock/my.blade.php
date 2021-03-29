@@ -35,25 +35,24 @@
             <th width="80">收盘价</th>
             <th width="80">最高价</th>
             <th width="80">最低价</th>
-            <th width="110">成交量</th>
-            <th width="170">时间</th>
+            <th width="170">关注时间</th>
+            <th width="100">关注以来涨跌幅</th>
             <th width="">动作</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($ls as $v)
             <tr target="sid_user" rel="5">
-                <td>{{$v->symbol}}</td>
-                <td>{{$v->open}}</td>
-                <td>{{$v->close}}</td>
-                <td>{{$v->low}}</td>
-                <td>{{$v->high}}</td>
-                <td>{{$v->volume}}</td>
-                <td>{{$v->ftime}}</td>
+                <td>{{$v->stock->symbol}}</td>
+                <td>{{$v->stock->open}}</td>
+                <td>{{$v->stock->close}}</td>
+                <td>{{$v->stock->low}}</td>
+                <td>{{$v->stock->high}}</td>
+                <td>{{$v->ctime}}</td>
+                <td>{{$v->rateFromStar()}}</td>
                 <td>
-                    <a title="确定{{$v->hasStar()?'取消关注':'关注'}}吗？" target="ajaxTodo"
-                       href="/stock/star?symbol={{$v->symbol}}" class="{{$v->hasStar()?'btnDel':'btnAdd'}}">关注</a>
-                    <a title="查看详情" target="navTab" href="/stock/info?symbol={{$v->symbol}}" class="btnInfo">详情</a>
+                    <a title="查看详情" target="navTab" href="/stock/info?symbol={{$v->stock->symbol}}"
+                       class="btnInfo">详情</a>
                 </td>
             </tr>
         @endforeach
@@ -67,5 +66,5 @@
     </div>
 </div>
 
-<form id="pagerForm" action="/stock/info" method="get">
+<form id="pagerForm" action="/stock/list" method="get">
 </form>

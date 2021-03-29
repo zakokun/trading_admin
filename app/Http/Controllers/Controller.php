@@ -14,7 +14,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function json($code, $msg, $tp, $url)
+    public function json($code, $msg, $tp = '', $url = '')
     {
         return response()->json(
             [
