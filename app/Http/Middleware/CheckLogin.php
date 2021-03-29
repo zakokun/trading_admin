@@ -16,8 +16,12 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (strstr($request->path(), "login") && (!isset($_SESSION['user_id']))) {
-            return $next($request);
+        if (strstr($request->path(), "login")) { //登陆页
+            if (!isset($_SESSION['user_id'])) { // 未登录
+                return $next($request);
+            } else {
+                return redirect("/");
+            }
         }
         if (!isset($_SESSION['user_id'])) {
             return redirect("/login/main");

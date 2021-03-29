@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use App\Models\StockDaily;
 use App\Models\UserStockStars;
 use Dotenv\Store\StoreInterface;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ class StockController extends Controller
 {
     public function list(Request $request)
     {
+        return $this->json(301,"参数错误");
         $m = new Stock();
         $all = $request->all();
         if (isset($all["keyword"])) {
@@ -33,9 +35,12 @@ class StockController extends Controller
     function info(Request $request)
     {
         $sid = $request->get("symbol");
-        $s = $request->get("start");
-        $e = $request->get('end');
-
+        $s = $request->get("start", date('Y-m-d', time() - 86400 * 30));
+        $e = $request->get('end', date('Y-m-d'));
+        if (strtotime($s) >= strtotime($e)) {
+            return $this->json(301, "时间格式不正确");
+        }
+        StockDaily::where('symbol', $sid)->where('ptime', ">=", $s)->where('ptime', "<=", $s)->find();
 
     }
 

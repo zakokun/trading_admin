@@ -47,6 +47,7 @@
         </div>
     </div>
 </div>
+</body>
 
 <script src="/login/js/jquery-3.2.1.min.js"></script>
 <script src="/login/js/main.js"></script>
@@ -57,5 +58,4 @@
         @endisset
     });
 </script>
-</body>
 </html>
