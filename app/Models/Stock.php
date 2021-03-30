@@ -19,14 +19,4 @@ class Stock extends baseModel
             return true;
         }
     }
-
-    public function stock(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo("App\Models\Stock", 'symbol', 'symbol');
-    }
-
-    public function rateFromStar(): float
-    {
-        return ($this->star_price - $this->stock->close) / $this->stock->close;
-    }
 }

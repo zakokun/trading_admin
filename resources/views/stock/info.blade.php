@@ -3,10 +3,17 @@
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
-                <input type="hidden" name="page" value="{{$ls->currentPage()}}"/>
+                <input type="hidden" name="page"/>
                 <tr>
                     <td>
                         数字货币名称：<input type="text" value="{{$all['keyword']?? ""}}" name="keyword"/>
+                    </td>
+                    <td class="dateRange">
+                        建档日期:
+                        <input name="startDate" class="date readonly textInput" readonly="readonly" type="text"
+                               value=""/>
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly textInput" readonly="readonly" type="text" value=""/>
                     </td>
                     <td>
                         <div class="buttonActive">
@@ -16,50 +23,92 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-
-                </tr>
             </table>
         </div>
     </form>
 </div>
 
 <div class="pageContent">
-    <div class="panelBar">
-    </div>
-    <table class="table" width="100%" layoutH="138">
-        <thead>
-        <tr>
-            <th width="80">货币名称</th>
-            <th width="80">开盘价</th>
-            <th width="80">收盘价</th>
-            <th width="80">最高价</th>
-            <th width="80">最低价</th>
-            <th width="110">成交量</th>
-            <th width="170">关注时间</th>
-            <th width="100">关注以来涨跌幅</th>
-            <th width="">动作</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($ls as $v)
-            <tr target="sid_user" rel="5">
-                <td>{{$v->stock->symbol}}</td>
-                <td>{{$v->stock->open}}</td>
-                <td>{{$v->stock->close}}</td>
-                <td>{{$v->stock->low}}</td>
-                <td>{{$v->stock->high}}</td>
-                <td>{{$v->stock->volume}}</td>
-                <td>{{$v->ctime}}</td>
-                <td>{{$v->rateFromStar()}}</td>
-                <td>
-                    <a title="查看详情" target="navTab" href="/stock/info?symbol={{$v->stock->symbol}}" class="btnInfo">详情</a>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <div id="stock_info" style="height: 400px;"></div>
+    <script type="text/javascript">
+        (function ($) {
+            var myChart = echarts.init(document.getElementById('stock_info'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '价格走势图',
+                    subtext: ''
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['btcusdt', 'bchusdt']
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        dataView: {show: true, readOnly: false},
+                        magicType: {show: true, type: ['line', 'bar']},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                calculable: true,
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        axisLabel: {
+                            formatter: '{value} °C'
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name: 'btcusdt',
+                        type: 'line',
+                        data: [11, 11, 15, 13, 12, 13, 10],
+                        markPoint: {
+                            data: [
+                                {type: 'max', name: '最大值'},
+                                {type: 'min', name: '最小值'}
+                            ]
+                        },
+                        markLine: {
+                            data: [
+                                {type: 'average', name: '平均值'}
+                            ]
+                        }
+                    },
+                    {
+                        name: 'bchusdt',
+                        type: 'line',
+                        data: [1, -2, 2, 5, 3, 2, 0],
+                        markPoint: {
+                            data: [
+                                {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+                            ]
+                        },
+                        markLine: {
+                            data: [
+                                {type: 'average', name: '平均值'}
+                            ]
+                        }
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })(jQuery);
+    </script>
 </div>
-
 <form id="pagerForm" action="/stock/list" method="get">
 </form>

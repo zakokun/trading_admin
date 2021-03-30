@@ -19,8 +19,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        var_dump($_SESSION);
-        return;
         $m = User::where("username", $request->get('username'))->where('password', md5($request->get("password")))->first();
         if ($m == null) {
             return view("/login.login", ["msg" => "用户名或密码错误！"]);
@@ -60,7 +58,8 @@ class LoginController extends Controller
 
     public function out()
     {
-        session_destroy();
+        unset($_SESSION['user_id']);
+        unset($_SESSION['username']);
         return redirect("/");
     }
 }

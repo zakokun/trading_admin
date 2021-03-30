@@ -12,7 +12,9 @@ class StockController extends Controller
 {
     public function list(Request $request)
     {
-        return $this->json(301,"参数错误");
+        if ($request->get("keyword") === "a") {
+            return $this->json(301, "参数错误");
+        }
         $m = new Stock();
         $all = $request->all();
         if (isset($all["keyword"])) {
@@ -26,7 +28,7 @@ class StockController extends Controller
     {
         $uid = $_SESSION['user_id'];
         $all = $request->all();
-        $m = UserStockStars::where('user_id', $uid)->order('ctime', 'desc');
+        $m = UserStockStars::where('user_id', $uid)->orderBy('ctime', 'desc');
         $ls = $m->paginate(2);
         return view("stock.my", ["ls" => $ls, "all" => $all]);
     }
@@ -34,14 +36,17 @@ class StockController extends Controller
     // 基础信息和折线图
     function info(Request $request)
     {
-        $sid = $request->get("symbol");
-        $s = $request->get("start", date('Y-m-d', time() - 86400 * 30));
-        $e = $request->get('end', date('Y-m-d'));
-        if (strtotime($s) >= strtotime($e)) {
-            return $this->json(301, "时间格式不正确");
+        $all = $request->all();
+        $sid = $all['symbol']??"btcusdt";
+        $m = StockDaily::where('symbol', $sid);
+        if (isset($all['start'])) {
+            $m = $m->where('ptime', ">=", $request->get('start'));
         }
-        StockDaily::where('symbol', $sid)->where('ptime', ">=", $s)->where('ptime', "<=", $s)->find();
-
+        if (isset($all['end'])) {
+            $m = $m->where('ptime', "<=", $request->get('end'));
+        }
+        $ls = $m->get();
+        return view("stock.info", ["ls" => $ls, "all" => $all]);
     }
 
     public function star(Request $request)

@@ -36,22 +36,22 @@
             <th width="80">最高价</th>
             <th width="80">最低价</th>
             <th width="170">关注时间</th>
-            <th width="100">关注以来涨跌幅</th>
+            <th width="150">关注以来涨跌幅</th>
             <th width="">动作</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($ls as $v)
             <tr target="sid_user" rel="5">
-                <td>{{$v->stock->symbol}}</td>
-                <td>{{$v->stock->open}}</td>
-                <td>{{$v->stock->close}}</td>
-                <td>{{$v->stock->low}}</td>
-                <td>{{$v->stock->high}}</td>
+                <td>{{$v->myStock()->symbol}}</td>
+                <td>{{$v->myStock()->open}}</td>
+                <td>{{$v->myStock()->close}}</td>
+                <td>{{$v->myStock()->low}}</td>
+                <td>{{$v->myStock()->high}}</td>
                 <td>{{$v->ctime}}</td>
-                <td>{{$v->rateFromStar()}}</td>
+                <td>{{$v->rateFromStar()*100}}%</td>
                 <td>
-                    <a title="查看详情" target="navTab" href="/stock/info?symbol={{$v->stock->symbol}}"
+                    <a title="查看详情" target="navTab" href="/stock/info?symbol={{$v->myStock()->symbol}}"
                        class="btnInfo">详情</a>
                 </td>
             </tr>

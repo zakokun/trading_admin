@@ -98,9 +98,23 @@
                     <ul class="tree treeFolder">
                         <li><a href="#">资产管理</a>
                             <ul>
-                                <li><a href="/stock/list" target="navTab" rel="main">货币列表</a></li>
-                                <li><a href="/finance/list" target="navTab" rel="main">我的行情</a></li>
-                                <li><a href="/trade/list" target="navTab" rel="main">交易列表</a></li>
+                                <li><a href="/stock/list" target="navTab" refresh="false" rel="stockList">资产列表</a></li>
+                                <li><a href="/stock/myStar" target="navTab" rel="myStock">我的关注</a></li>
+                                <li><a href="/stock/info" target="navTab" rel="stockInfo">行情走势</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">交易管理</a>
+                            <ul>
+                                <li><a href="/trade/list" target="navTab" refresh="false" rel="stockList">货币列表</a></li>
+                                <li><a href="/stock/myStar" target="navTab" rel="myStock">我的行情</a></li>
+                                <li><a href="/trade/list" target="navTab" rel="orderList">交易列表</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">用户管理</a>
+                            <ul>
+                                <li><a href="/user/info" target="navTab" refresh="false" rel="stockList">货币列表</a></li>
+                                <li><a href="/stock/myStar" target="navTab" rel="myStock">我的行情</a></li>
+                                <li><a href="/trade/list" target="navTab" rel="orderList">交易列表</a></li>
                             </ul>
                         </li>
                     </ul>
