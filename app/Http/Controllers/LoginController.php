@@ -23,6 +23,8 @@ class LoginController extends Controller
         if ($m == null) {
             return view("/login.login", ["msg" => "用户名或密码错误！"]);
         }
+        $m->last_login_time = date("Y-m-d H:i:s");
+        $m->save();
         $_SESSION['user_id'] = $m->id;
         $_SESSION['username'] = $m->username;
         return redirect("/");
