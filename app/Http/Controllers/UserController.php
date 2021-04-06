@@ -13,6 +13,17 @@ class UserController extends Controller
         return view("user.info", ["user" => $user]);
     }
 
+    public function showChangePassword(Request $request)
+    {
+        $user = User::where('user_id', $_SESSION['user_id'])->first();
+        return view("user.pwd", ["user" => $user]);
+    }
+
+    public function showBind(Request $request)
+    {
+        return view("user.bind");
+    }
+
     public function changePassword(Request $request)
     {
         $oldPwd = $request->get("oldPassword");
@@ -34,6 +45,9 @@ class UserController extends Controller
     {
         $key = $request->get("key");
         $secret = $request->get("secret");
+        if ($key === "" || $secret === "") {
+            return $this->json(301, "key 和 secret 不能为空");
+        }
         $user = User::where('user_id', $_SESSION['user_id'])->first();
         $user->app_key = $key;
         $user->secret = $secret;
