@@ -9,19 +9,20 @@ class UserController extends Controller
 {
     public function info(Request $request)
     {
-        $user = User::where('user_id', $_SESSION['user_id'])->first();
+        $user = User::where('id', $_SESSION['user_id'])->first();
         return view("user.info", ["user" => $user]);
     }
 
     public function showChangePassword(Request $request)
     {
-        $user = User::where('user_id', $_SESSION['user_id'])->first();
+        $user = User::where('id', $_SESSION['user_id'])->first();
         return view("user.pwd", ["user" => $user]);
     }
 
     public function showBind(Request $request)
     {
-        return view("user.bind");
+        $user = User::where('id', $_SESSION['user_id'])->first();
+        return view("user.bind",["user" => $user]);
     }
 
     public function changePassword(Request $request)
@@ -29,7 +30,7 @@ class UserController extends Controller
         $oldPwd = $request->get("oldPassword");
         $newPwd = $request->get("newPassword");
         $reNew = $request->get("rePassword");
-        $user = User::where('user_id', $_SESSION['user_id'])->first();
+        $user = User::where('id', $_SESSION['user_id'])->first();
         if ($user->password != md5($oldPwd)) {
             return $this->json(301, "原密码错误！");
         }
@@ -48,7 +49,7 @@ class UserController extends Controller
         if ($key === "" || $secret === "") {
             return $this->json(301, "key 和 secret 不能为空");
         }
-        $user = User::where('user_id', $_SESSION['user_id'])->first();
+        $user = User::where('id', $_SESSION['user_id'])->first();
         $user->app_key = $key;
         $user->secret = $secret;
         $user->save();

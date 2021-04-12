@@ -4,13 +4,13 @@
         <div class="pageFormContent" layoutH="58">
             <div class="unit">
                 <label>appKey：</label>
-                <input type="text" name="app_key" size="30"
+                <input type="text" name="app_key" size="30" value="{{$user['app_key']}}"
                        class="required alphanumeric" alt="请输入交易所appKey"/>
             </div>
             <div class="unit">
                 <label>Secret：</label>
                 <input type="password" name="secret" size="30" alt="请输入交易所secret"
-                       class="required alphanumeric"/>
+                       value="{{$user['secret']}}" class="required alphanumeric"/>
             </div>
         </div>
         <div class="formBar">

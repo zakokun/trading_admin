@@ -67,7 +67,6 @@ class StockController extends Controller
             $f->delete();
             $msg = '取消关注成功';
         }
-        $f->save();
         return $this->json(200, $msg);
     }
 }

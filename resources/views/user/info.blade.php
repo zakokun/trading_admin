@@ -9,7 +9,7 @@
             </div>
             <div class="unit">
                 <label>上次登录时间：</label>
-                <label>{{$user->last_login_time}}</label>
+                <label style="width: 200px">{{$user->last_login_time}}</label>
             </div>
             <div class="unit">
                 <label>Appkey状态：</label>

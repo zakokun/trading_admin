@@ -1,5 +1,5 @@
 <div class="pageHeader">
-    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/stock/list" method="get"
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/stock/myStar" method="get"
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
@@ -53,6 +53,9 @@
                 <td>
                     <a title="查看详情" target="navTab" href="/stock/info?symbol={{$v->myStock()->symbol}}"
                        class="btnInfo">详情</a>
+                    <a title="确定{{$v->myStock()->hasStar()?'取消关注':'关注'}}吗？" target="ajaxTodo"
+                       href="/stock/star?symbol={{$v->symbol}}" class="{{$v->myStock()->hasStar()?'btnDel':'btnAdd'}}">关注</a>
+
                 </td>
             </tr>
         @endforeach
@@ -66,5 +69,5 @@
     </div>
 </div>
 
-<form id="pagerForm" action="/stock/list" method="get">
+<form id="pagerForm" action="/stock/myStar" method="get">
 </form>

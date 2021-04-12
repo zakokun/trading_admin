@@ -112,9 +112,9 @@
                         </li>
                         <li><a href="#">用户管理</a>
                             <ul>
-                                <li><a href="/user/info" target="navTab" refresh="false" rel="stockList">货币列表</a></li>
-                                <li><a href="/stock/myStar" target="navTab" rel="myStock">我的行情</a></li>
-                                <li><a href="/trade/list" target="navTab" rel="orderList">交易列表</a></li>
+                                <li><a href="/user/info" target="navTab" refresh="false" rel="stockList">基本信息</a></li>
+                                <li><a href="/user/showChangePassword" target="navTab" rel="myStock">修改密码</a></li>
+                                <li><a href="/user/showBind" target="navTab" rel="orderList">绑定交易所账户</a></li>
                             </ul>
                         </li>
                     </ul>
