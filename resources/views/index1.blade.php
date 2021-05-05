@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>简单实用国产jQuery UI框架 - DWZ富客户端框架(J-UI.com)</title>
+    <title>量化交易系统</title>
 
     <link href="/dwz/themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="/dwz/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -16,17 +16,7 @@
     <script src="/dwz/js/jquery-1.12.4.js" type="text/javascript"></script><![endif]-->
     <!--[if gte IE 9]><!-->
     <script src="/dwz/js/jquery-3.4.1.js" type="text/javascript"></script><!--<![endif]-->
-    <script src="/dwz/js/jquery.cookie.js" type="text/javascript"></script>
-    <script src="/dwz/js/jquery.validate.js" type="text/javascript"></script>
-    <!--<script src="/dwz/js/jquery.bgiframe.js" type="text/javascript"></script>-->
-    {{--    <script src="xheditor/xheditor-1.2.2.min.js" type="text/javascript"></script>--}}
-    {{--    <script src="xheditor/xheditor_lang/zh-cn.js" type="text/javascript"></script>--}}
-    {{--    <script src="uploadify/scripts/jquery.uploadify.js" type="text/javascript"></script>--}}
-
-    <script type="text/javascript" src="/dwz/js/echarts.min.js"></script>
-    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=6PYkS1eDz5pMnyfO0jvBNE0F"></script>
-    <script type="text/javascript" src="//api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
-
+    <script type="text/javascript" src="dwz/chart/echarts.min.js"></script>
     <script src="/dwz/js/dwz.core.js" type="text/javascript"></script>
     <script src="/dwz/js/dwz.util.date.js" type="text/javascript"></script>
     <script src="/dwz/js/dwz.validate.method.js" type="text/javascript"></script>
@@ -60,17 +50,15 @@
     <script src="/dwz/js/dwz.combox.js" type="text/javascript"></script>
     <script src="/dwz/js/dwz.file.js" type="text/javascript"></script>
     <script src="/dwz/js/dwz.print.js" type="text/javascript"></script>
-
-    <!-- 可以用dwz.min.js替换前面全部dwz.*.js (注意：替换时下面dwz.regional.zh.js还需要引入)
-    <script src="bin/dwz.min.js" type="text/javascript"></script>
-    -->
+    
+    
     <script src="/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(function () {
-            DWZ.init("/dwz/bin/dwz.frag.xml", {
-                loginUrl: "login_dialog.html", loginTitle: "登录",	// 弹出登录对话框
-//		loginUrl:"login.html",	// 跳到登录页面
+            DWZ.init("dwz/bin/dwz.frag.xml", {
+                // loginUrl: "login_dialog.html", loginTitle: "登录",	// 弹出登录对话框
+                loginUrl: "/login/main",	// 跳到登录页面
                 statusCode: {ok: 200, error: 300, timeout: 301}, //【可选】
                 pageInfo: {
                     pageNum: "page",
@@ -83,7 +71,7 @@
                 debug: false,	// 调试模式 【true|false】
                 callback: function () {
                     initEnv();
-                    $("#themeList").theme({themeBase: "themes"}); // themeBase 相对于index页面的主题base路径
+                    $("#themeList").theme({themeBase: "/dwz/themes"}); // themeBase 相对于index页面的主题base路径
                 }
             });
         });
@@ -138,6 +126,7 @@
             <div class="toggleCollapse"><h2>主菜单</h2>
                 <div>收缩</div>
             </div>
+
             <div class="accordion" fillSpace="sidebar">
                 <div class="accordionContent">
                     <ul class="tree treeFolder">
@@ -195,7 +184,7 @@
 
 </div>
 
-<div id="footer">Copyright &copy; 2020 <a href="demo_page2.html" target="dialog">DWZ团队</a> 京ICP备15053290号-2</div>
+<div id="footer">Copyright &copy; 2020 <a href="#" target="dialog">DWZ团队</a> 京ICP备15053290号-2</div>
 
 </body>
 </html>

@@ -27,15 +27,16 @@ class UserController extends Controller
 
     public function changePassword(Request $request)
     {
-        $oldPwd = $request->get("oldPassword");
-        $newPwd = $request->get("newPassword");
-        $reNew = $request->get("rePassword");
+        $oldPwd = $request->post("password");
+        $newPwd = $request->post("newPassword");
+        $reNew = $request->post("rnewPassword");
         $user = User::where('id', $_SESSION['user_id'])->first();
+
         if ($user->password != md5($oldPwd)) {
-            return $this->json(301, "原密码错误！");
+            return $this->json(300, "原密码错误！");
         }
         if ($newPwd != $reNew) {
-            return $this->json(301, "两次输入密码不一致！");
+            return $this->json(300, "两次输入密码不一致！");
         }
         $user->password = md5($newPwd);
         $user->save();
@@ -44,8 +45,8 @@ class UserController extends Controller
 
     public function bindAppKey(Request $request)
     {
-        $key = $request->get("key");
-        $secret = $request->get("secret");
+        $key = $request->post("app_key");
+        $secret = $request->post("secret");
         if ($key === "" || $secret === "") {
             return $this->json(301, "key 和 secret 不能为空");
         }

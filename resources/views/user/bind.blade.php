@@ -9,7 +9,7 @@
             </div>
             <div class="unit">
                 <label>Secret：</label>
-                <input type="password" name="secret" size="30" alt="请输入交易所secret"
+                <input type="text" name="secret" size="30" alt="请输入交易所secret"
                        value="{{$user['secret']}}" class="required alphanumeric"/>
             </div>
         </div>
