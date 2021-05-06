@@ -20,7 +20,7 @@ class StockController extends Controller
         if (isset($all["keyword"])) {
             $m = $m->where("symbol", "like", "%" . $all['keyword'] . "%");
         }
-        $ls = $m->paginate(2);
+        $ls = $m->paginate(15);
         return view("stock.list", ["ls" => $ls, "all" => $all]);
     }
 
