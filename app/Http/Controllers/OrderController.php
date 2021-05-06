@@ -19,11 +19,13 @@ class OrderController extends Controller
         return view("order.list", ["ls" => $ls, "all" => $all]);
     }
 
-    public function put(Request $request)
+    public function showAdd(Request $request)
     {
-        $user = User::find($_SESSION['user_id']);
-        if (is_null($user) || $user->appkey == "") {
+        $user = User::where("id", $_SESSION['user_id'])->first();
+        if (is_null($user) || $user->app_key == "") {
             return $this->json(300, "还未绑定appkey，请先去绑定");
         }
+        return view("order.add",['user'=>$user]);
+
     }
 }

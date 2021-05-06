@@ -148,11 +148,10 @@
                                 <li><a href="/stock/info" target="navTab" rel="stockInfo">行情走势</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">交易管理</a>
+                        <li><a href="#">订单管理</a>
                             <ul>
-                                <li><a href="/trade/list" target="navTab" refresh="false" rel="stockList">货币列表</a></li>
-                                <li><a href="/stock/myStar" target="navTab" rel="myStock">我的行情</a></li>
-                                <li><a href="/trade/list" target="navTab" rel="orderList">交易列表</a></li>
+                                <li><a href="/order/list" target="navTab" refresh="false" rel="orderList">我的订单</a></li>
+                                <li><a href="/order/income" target="navTab" rel="income">收益详情</a></li>
                             </ul>
                         </li>
                         <li><a href="#">用户管理</a>
