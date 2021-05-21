@@ -39,17 +39,14 @@ class StockController extends Controller
         $all = $request->all();
         $sid = $all['symbol'] ?? "btc";
         $m = StockDaily::where('symbol', $sid);
-        if (isset($all['start'])) {
-            $m = $m->where('ts', ">=", strtotime($request->get('start')));
+        $start = $all["start"] ?? strtotime(date("y-m-d", time() - 7 * 86400));
+        if (isset($start)) {
+            $m = $m->where('ts', ">=", $start);
         }
         if (isset($all['end'])) {
             $m = $m->where('ts', "<=", strtotime($request->get('end')));
         }
         $ls = $m->orderBy("ts")->get();
-        $dateStr = "";
-        foreach ($ls as $v) {
-            $dateStr .= "'" . date("m-d", $v->ts) . "',";
-        }
         return view("stock.info", ["ls" => $ls, "symbol" => $sid, "start" => $all['start'] ?? "", "end" => $all['end'] ?? ""]);
     }
 

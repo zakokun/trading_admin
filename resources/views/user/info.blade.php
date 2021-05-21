@@ -15,10 +15,6 @@
                 <label>Appkey状态：</label>
                 <label>{{$user->app_key?"已绑定":"未绑定"}}</label>
             </div>
-            <div class="unit">
-                <label>总收益：</label>
-                <label>{{$user->app_key?"已绑定":"未绑定"}}</label>
-            </div>
         </div>
         {{--        <div class="formBar">--}}
         {{--            <ul>--}}

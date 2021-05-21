@@ -6,7 +6,7 @@
                 <input type="hidden" name="page"/>
                 <tr>
                     <td>
-                        数字货币名称：<input type="text" value="{{$symbol??""}}" name="keyword"/>
+                        数字货币名称：<input type="text" value="{{$symbol??""}}" name="symbol"/>
                     </td>
                     <td class="dateRange">
                         建档日期:
@@ -61,7 +61,13 @@
                     {
                         type: 'category',
                         boundaryGap: false,
-                        data: ["a","b","c","d","e","f","g"
+                        data: [
+                            @foreach ($ls as $k=> $v)
+                                    @if($k!=0)
+                                    {{","}}
+                                    @endif
+                            '{{date("m-d",intval($v->ts))}}'
+                            @endforeach
                         ]
                     }
                 ],
@@ -77,7 +83,12 @@
                     {
                         name: '{{$symbol}}',
                         type: 'line',
-                        data: [1, 3, 2, 5, 3, 2, 0],
+                        data: [@foreach ($ls as $k=> $v)
+                                @if($k!=0)
+                                {{","}}
+                                @endif
+                            '{{$v->open}}'
+                            @endforeach],
                         markPoint: {
                             data: [
                                 {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
