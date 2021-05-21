@@ -1,19 +1,20 @@
 <div class="pageHeader">
-    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/stock/list" method="get"
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/stock/info" method="get"
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
                 <input type="hidden" name="page"/>
                 <tr>
                     <td>
-                        数字货币名称：<input type="text" value="{{$all['keyword']?? ""}}" name="keyword"/>
+                        数字货币名称：<input type="text" value="{{$symbol??""}}" name="keyword"/>
                     </td>
                     <td class="dateRange">
                         建档日期:
-                        <input name="startDate" class="date readonly textInput" readonly="readonly" type="text"
-                               value=""/>
+                        <input name="start" class="date readonly textInput" readonly="readonly" type="text"
+                               value="{{$start?? ""}}"/>
                         <span class="limit">-</span>
-                        <input name="endDate" class="date readonly textInput" readonly="readonly" type="text" value=""/>
+                        <input name="end" class="date readonly textInput" readonly="readonly" type="text"
+                               value="{{$end?? ""}}"/>
                     </td>
                     <td>
                         <div class="buttonActive">
@@ -43,7 +44,7 @@
                     trigger: 'axis'
                 },
                 legend: {
-                    data: ['btcusdt', 'bchusdt']
+                    data: ['{{$symbol}}']
                 },
                 toolbox: {
                     show: true,
@@ -60,7 +61,8 @@
                     {
                         type: 'category',
                         boundaryGap: false,
-                        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                        data: ["a","b","c","d","e","f","g"
+                        ]
                     }
                 ],
                 yAxis: [
@@ -73,23 +75,7 @@
                 ],
                 series: [
                     {
-                        name: 'btcusdt',
-                        type: 'line',
-                        data: [11, 11, 15, 13, 12, 13, 10],
-                        markPoint: {
-                            data: [
-                                {type: 'max', name: '最大值'},
-                                {type: 'min', name: '最小值'}
-                            ]
-                        },
-                        markLine: {
-                            data: [
-                                {type: 'average', name: '平均值'}
-                            ]
-                        }
-                    },
-                    {
-                        name: 'bchusdt',
+                        name: '{{$symbol}}',
                         type: 'line',
                         data: [1, 3, 2, 5, 3, 2, 0],
                         markPoint: {
@@ -110,5 +96,5 @@
         })(jQuery);
     </script>
 </div>
-<form id="pagerForm" action="/stock/list" method="get">
+<form id="pagerForm" action="/stock/info" method="get">
 </form>

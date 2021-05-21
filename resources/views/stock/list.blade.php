@@ -49,7 +49,7 @@
                 <td>{{$v->low}}</td>
                 <td>{{$v->high}}</td>
                 <td>{{$v->volume}}</td>
-                <td>{{$v->ftime}}</td>
+                <td>{{date("Y-m-d",$v->ts)}}</td>
                 <td>
                     <a title="查看详情" target="navTab" href="/stock/info?symbol={{$v->symbol}}" class="btnInfo">详情</a>
                     <a title="确定{{$v->hasStar()?'取消关注':'关注'}}吗？" target="ajaxTodo"

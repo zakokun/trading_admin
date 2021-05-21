@@ -37,16 +37,20 @@ class StockController extends Controller
     function info(Request $request)
     {
         $all = $request->all();
-        $sid = $all['symbol']??"btcusdt";
+        $sid = $all['symbol'] ?? "btc";
         $m = StockDaily::where('symbol', $sid);
         if (isset($all['start'])) {
-            $m = $m->where('ptime', ">=", $request->get('start'));
+            $m = $m->where('ts', ">=", strtotime($request->get('start')));
         }
         if (isset($all['end'])) {
-            $m = $m->where('ptime', "<=", $request->get('end'));
+            $m = $m->where('ts', "<=", strtotime($request->get('end')));
         }
-        $ls = $m->get();
-        return view("stock.info", ["ls" => $ls, "all" => $all]);
+        $ls = $m->orderBy("ts")->get();
+        $dateStr = "";
+        foreach ($ls as $v) {
+            $dateStr .= "'" . date("m-d", $v->ts) . "',";
+        }
+        return view("stock.info", ["ls" => $ls, "symbol" => $sid, "start" => $all['start'] ?? "", "end" => $all['end'] ?? ""]);
     }
 
     public function star(Request $request)

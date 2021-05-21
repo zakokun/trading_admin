@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>简单实用国产jQuery UI框架 - DWZ富客户端框架(J-UI.com)</title>
+    <title>数字货币交易平台</title>
 
     <link href="/dwz/themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="/dwz/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -83,7 +83,7 @@
                 debug: false,	// 调试模式 【true|false】
                 callback: function () {
                     initEnv();
-                    $("#themeList").theme({themeBase: "themes"}); // themeBase 相对于index页面的主题base路径
+                    $("#themeList").theme({themeBase: "/dwz/themes"}); // themeBase 相对于index页面的主题base路径
                 }
             });
         });
@@ -96,7 +96,7 @@
 <div id="layout">
     <div id="header">
         <div class="headerNav">
-            <a class="logo" href="http://j-ui.com">标志</a>
+{{--            <a class="logo" href="http://j-ui.com">标志</a>--}}
             <ul class="nav">
                 <li><a href="#">欢迎你：{{$_SESSION['username']}}</a></li>
 
@@ -151,7 +151,7 @@
                         <li><a href="#">订单管理</a>
                             <ul>
                                 <li><a href="/order/list" target="navTab" refresh="false" rel="orderList">我的订单</a></li>
-                                <li><a href="/order/income" target="navTab" rel="income">收益详情</a></li>
+{{--                                <li><a href="/order/income" target="navTab" rel="income">收益详情</a></li>--}}
                             </ul>
                         </li>
                         <li><a href="#">用户管理</a>
@@ -194,7 +194,7 @@
 
 </div>
 
-<div id="footer">Copyright &copy; 2020 <a href="demo_page2.html" target="dialog">DWZ团队</a> 京ICP备15053290号-2</div>
+<div id="footer">Copyright &copy; 2021 <a href="demo_page2.html" target="dialog"></a></div>
 
 </body>
 </html>

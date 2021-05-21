@@ -36,7 +36,7 @@
             <th width="80">货币名称</th>
             <th width="80">成交价</th>
             <th width="80">数量</th>
-            <th width="80">成交数量</th>
+            <th width="80">动作</th>
             <th width="110">订单状态</th>
             <th width="170">下单时间</th>
             <th width="">动作</th>
@@ -46,14 +46,14 @@
         @foreach ($ls as $v)
             <tr target="sid_user" rel="5">
                 <td>{{$v->symbol}}</td>
-                <td>{{$v->low}}</td>
-                <td>{{$v->high}}</td>
-                <td>{{$v->volume}}</td>
-                <td>{{$v->ftime}}</td>
-                <td>{{$v->ftime}}</td>
+                <td>{{$v->price}}</td>
+                <td>{{$v->num}}</td>
+                <td>{{$v->actName()}}</td>
+                <td>{{$v->stateName()}}</td>
+                <td>{{$v->ctime}}</td>
                 <td>
                     <a title="确定取消订单吗？" target="ajaxTodo"
-                       href="/order/reset?id={{$v->id}}" class="btnAttach">取消订单</a>
+                       href="/order/reset?id={{$v->id}}" class="btnEdit">取消订单</a>
                     <a title="确定删除订单吗？" target="ajaxTodo"
                        href="/order/delete?id={{$v->id}}" class="btnDel">删除订单</a>
                 </td>

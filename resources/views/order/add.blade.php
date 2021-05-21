@@ -12,19 +12,19 @@
             </div>
             <div class="unit">
                 <label>动作：</label>
-                <select class="combox" name="act" id="combox_test_demo">
+                <select class="combox" name="act">
                     <option value="1">买入</option>
                     <option value="2">卖出</option>
                 </select>
             </div>
             <div class="unit">
                 <label>价格：</label>
-                <input type="text" name="secret" size="30" alt="价格"
+                <input type="text" name="price" size="30" alt="价格"
                        value="" class="required number"/>
             </div>
             <div class="unit">
                 <label>数量：</label>
-                <input type="text" name="secret" size="30" alt="数量"
+                <input type="text" name="num" size="30" alt="数量"
                        value="" class="required number"/>
             </div>
         </div>

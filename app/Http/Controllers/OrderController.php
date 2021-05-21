@@ -16,7 +16,7 @@ class OrderController extends Controller
         if (isset($all["keyword"])) {
             $m = $m->where("symbol", "like", "%" . $all['keyword'] . "%");
         }
-        $ls = $m->where("user_id", $_SESSION['user_id'])->orderBy('ctime', 'desc')->paginate(2);
+        $ls = $m->where("state","gte", 0)->where("user_id", $_SESSION['user_id'])->orderBy('ctime', 'desc')->paginate(2);
         return view("order.list", ["ls" => $ls, "all" => $all]);
     }
 
@@ -26,7 +26,7 @@ class OrderController extends Controller
         if (is_null($user) || $user->app_key == "") {
             return $this->json(300, "还未绑定appkey，请先去绑定");
         }
-        $stocks = Stock::find();
+        $stocks = Stock::get();
         return view("order.add", ['user' => $user, "stocks" => $stocks]);
     }
 
@@ -38,6 +38,7 @@ class OrderController extends Controller
         $num = $request->post("num");
 
         $m = new Order();
+        $m->user_id = $_SESSION['user_id'];
         $m->symbol = $symbol;
         $m->act = $act;
         $m->price = $price;
@@ -45,5 +46,23 @@ class OrderController extends Controller
 
         $m->save();
         return $this->json(200, "下单成功！");
+    }
+
+    public function reset(Request $request)
+    {
+        $id = $request->get("id");
+        $m = Order::where("id", $id)->first();
+        $m->state = 4;
+        $m->save();
+        return $this->json(200, "取消订单成功");
+    }
+
+    public function delete(Request $request)
+    {
+        $id = $request->get("id");
+        $m = Order::where("id", $id)->first();
+        $m->state = -1;
+        $m->save();
+        return $this->json(200, "删除订单成功");
     }
 }
