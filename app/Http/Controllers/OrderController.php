@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Stock;
 use \App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,24 @@ class OrderController extends Controller
         if (is_null($user) || $user->app_key == "") {
             return $this->json(300, "还未绑定appkey，请先去绑定");
         }
-        return view("order.add",['user'=>$user]);
+        $stocks = Stock::find();
+        return view("order.add", ['user' => $user, "stocks" => $stocks]);
+    }
 
+    public function add(Request $request)
+    {
+        $symbol = $request->post("symbol");
+        $act = $request->post("act");
+        $price = $request->post("price");
+        $num = $request->post("num");
+
+        $m = new Order();
+        $m->symbol = $symbol;
+        $m->act = $act;
+        $m->price = $price;
+        $m->num = $num;
+
+        $m->save();
+        return $this->json(200, "下单成功！");
     }
 }

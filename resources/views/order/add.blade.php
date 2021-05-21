@@ -4,8 +4,18 @@
         <div class="pageFormContent" layoutH="58">
             <div class="unit">
                 <label>货币名称：</label>
-                <input type="text" name="symbol" size="30" value=""
-                       class="required" alt="请输入货币名称"/>
+                <select class="combox" name="symbol" id="combox_test_demo">
+                    @foreach ($stocks as $v)
+                    <option value={{$v->symbol}}> {{$v->symbol}} </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="unit">
+                <label>动作：</label>
+                <select class="combox" name="act" id="combox_test_demo">
+                    <option value="1">买入</option>
+                    <option value="2">卖出</option>
+                </select>
             </div>
             <div class="unit">
                 <label>价格：</label>
